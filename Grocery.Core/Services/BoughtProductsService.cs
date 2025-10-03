@@ -53,3 +53,4 @@ namespace Grocery.Core.Services
             return boughtProductsList;
         }
     }
+}
