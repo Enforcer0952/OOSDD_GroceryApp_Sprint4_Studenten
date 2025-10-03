@@ -5,7 +5,7 @@
              Title="Best Selling Products">
 
     <Grid RowDefinitions="Auto,*" Padding="20">
-        <!-- Table Header -->
+        <!-- Page Header -->
         <Label Grid.Row="0"
                Text="Top Selling Products Overview"
                FontSize="24"
@@ -14,52 +14,87 @@
                Margin="0,0,0,20"/>
 
         <!-- Table Content -->
-        <Grid Grid.Row="1" RowDefinitions="Auto,*">
+        <Grid Grid.Row="1">
+            <!-- Define a single set of column definitions for the entire table -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="90" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
             <!-- Column Headers -->
-            <Grid Grid.Row="0" 
-                  ColumnDefinitions="Auto,*,Auto,Auto" 
-                  BackgroundColor="#000000" 
-                  Padding="10">
+            <Grid Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="#000000" Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="90" />
+                </Grid.ColumnDefinitions>
+                
                 <Label Grid.Column="0" 
                        Text="Rank" 
+                       TextColor="White"
                        FontAttributes="Bold" 
-                       Margin="5,0"/>
+                       Margin="5,0"
+                       HorizontalOptions="Start"/>
                 <Label Grid.Column="1" 
                        Text="Product Name" 
+                       TextColor="White"
                        FontAttributes="Bold" 
-                       Margin="5,0"/>
+                       Margin="5,0"
+                       HorizontalOptions="Start"/>
                 <Label Grid.Column="2" 
                        Text="Current Stock" 
+                       TextColor="White"
                        FontAttributes="Bold" 
-                       Margin="5,0"/>
+                       Margin="5,0"
+                       HorizontalOptions="Start"/>
                 <Label Grid.Column="3" 
                        Text="Total Sold" 
+                       TextColor="White"
                        FontAttributes="Bold" 
-                       Margin="5,0"/>
+                       Margin="5,0"
+                       HorizontalOptions="Start"/>
             </Grid>
 
             <!-- Table Rows -->
-            <CollectionView Grid.Row="1" 
-                            ItemsSource="{Binding Products}">
+            <CollectionView Grid.Row="1" Grid.ColumnSpan="4"
+                            ItemsSource="{Binding Products}"
+                            Margin="0,2,0,0">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" 
-                              Padding="10">
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="110" />
+                                <ColumnDefinition Width="90" />
+                            </Grid.ColumnDefinitions>
+                            
                             <Label Grid.Column="0" 
                                    Text="{Binding Ranking}" 
-                                   VerticalOptions="Center" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" 
                                    Margin="5,0"/>
                             <Label Grid.Column="1" 
                                    Text="{Binding Name}" 
-                                   VerticalOptions="Center" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" 
                                    Margin="5,0"/>
                             <Label Grid.Column="2" 
                                    Text="{Binding Stock}" 
-                                   VerticalOptions="Center" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" 
                                    Margin="5,0"/>
                             <Label Grid.Column="3" 
                                    Text="{Binding NrOfSells}" 
-                                   VerticalOptions="Center" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" 
                                    Margin="5,0"/>
                         </Grid>
                     </DataTemplate>
