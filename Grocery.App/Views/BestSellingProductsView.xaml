@@ -1,46 +1,110 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:Grocery.App.ViewModels"
-             xmlns:m="clr-namespace:Grocery.Core.Models;assembly=Grocery.Core"
              x:Class="Grocery.App.Views.BestSellingProductsView"
-             x:DataType="vm:BestSellingProductsViewModel"
-             Title="BestSellingProductsView">
-    <Shell.TitleView>
-        <Grid>
-            <Label Text="Best verkochte producten" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
-        </Grid>
-    </Shell.TitleView>
+             Title="Best Selling Products">
 
-    <Border Stroke="#C49B33" StrokeThickness="4" Padding="10" Margin="10" HorizontalOptions="Center">
-        <CollectionView ItemsSource="{Binding Products}" Margin="20" HorizontalOptions="Center">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.Header>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <!-- PLaats hier de header velden voor de tabel-->
-                </Grid>
-            </CollectionView.Header>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="m:BestSellingProducts">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <!-- PLaats hier de datavelden voor de tabel-->
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </Border>
+    <Grid RowDefinitions="Auto,*" Padding="20">
+        <!-- Page Header -->
+        <Label Grid.Row="0"
+               Text="Top Selling Products Overview"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20"/>
+
+        <!-- Table Content -->
+        <Grid Grid.Row="1">
+            <!-- Define a single set of column definitions for the entire table -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="90" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <!-- Column Headers -->
+            <Grid Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="#000000" Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="90" />
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" 
+                       Text="Rank" 
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       Margin="5,0"
+                       HorizontalOptions="Start"/>
+                <Label Grid.Column="1" 
+                       Text="Product Name" 
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       Margin="5,0"
+                       HorizontalOptions="Start"/>
+                <Label Grid.Column="2" 
+                       Text="Current Stock" 
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       Margin="5,0"
+                       HorizontalOptions="Start"/>
+                <Label Grid.Column="3" 
+                       Text="Total Sold" 
+                       TextColor="White"
+                       FontAttributes="Bold" 
+                       Margin="5,0"
+                       HorizontalOptions="Start"/>
+            </Grid>
+
+            <!-- Table Rows -->
+            <CollectionView Grid.Row="1" Grid.ColumnSpan="4"
+                            ItemsSource="{Binding Products}"
+                            Margin="0,2,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="110" />
+                                <ColumnDefinition Width="90" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Grid.Column="0" 
+                                   Text="{Binding Ranking}" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" 
+                                   Margin="5,0"/>
+                            <Label Grid.Column="1" 
+                                   Text="{Binding Name}" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" 
+                                   Margin="5,0"/>
+                            <Label Grid.Column="2" 
+                                   Text="{Binding Stock}" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" 
+                                   Margin="5,0"/>
+                            <Label Grid.Column="3" 
+                                   Text="{Binding NrOfSells}" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" 
+                                   Margin="5,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="No products found"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Grid>
+    </Grid>
 </ContentPage>
